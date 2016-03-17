@@ -1,8 +1,10 @@
-h1 {
-	font-family: Verdana, sans-serif;
-	color: darkblue;
-}
-
 body {
 	background-color: beige; 
 }
+
+h1 {
+	font-family: Verdana, sans-serif;
+	color: darkblue;
+	padding: 50%;
+}
+
