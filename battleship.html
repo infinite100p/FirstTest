@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<title>Battleship Game</title>
+	</head>
+
+<body>
+
+<script>
+
+/* Battleship Game */
+var loc1 = Math.floor(Math.random() * 5);
+var loc2 = loc1 + 1;
+var loc3 = loc1 + 2;
+var guess;
+var correctGuesses = [];
+var hits = correctGuesses.length;
+var guesses = 0;
+var isSunk = false;
+
+// Is guess a valid input? If valid, add to number of guesses
+
+function checkGuess() {
+	guess = prompt("Ready, aim, fire! (enter number from 0-6):" );
+	if (isNaN(guess)) {
+		alert("Please enter a number");
+	} else if (guess < 0 || guess > 6) {
+		alert("Invalid number. Try again.");
+	} else {
+		guesses += 1;
+	}
+};
+
+// Add guess to list if not already included
+function addGuess(g) {
+	if (!(correctGuesses.includes(g))) {
+     correctGuesses.push(g);
+  }
+}
+
+function reset() {
+loc1 = Math.floor(Math.random() * 5);
+hits = 0;
+guesses = 0;
+isSunk = false;
+//correctGuesses = [];
+}
+
+function startGame() {
+while (!isSunk) {
+
+	checkGuess();
+  
+// Close out of dialog box when user hits Cancel
+  if (guess == null) {
+  break;
+  }
+
+	// Is user's guess correct? If yes, add to number of hits
+	// Alert user if it was a hit or miss	
+
+	if (!isNaN(guess)) {
+		if (guess == loc1 || guess == loc2 || guess == loc3) {
+      addGuess(guess);
+			hits += 1
+			alert("Hit!");
+		} else {
+			alert("Miss!");
+		}
+	} else {
+		checkGuess();
+	}
+
+     // If all 3 spots of battleship are hit, then ship has sunk. Alert user
+		if (hits == 3) {
+		isSunk = true;
+		alert("Battleship destroyed!");
+
+		var stats = "You took " + guesses + " guesses to sink the battleship.\n" + 
+				"Your shooting accuracy: " + ((3/guesses) * 100) + "%";
+
+		alert(stats);
+
+		reset();
+		startGame();
+		}
+/*
+	if (guess == null) {
+  break;
+  }*/
+
+
+}};
+
+startGame();
+
+</script>
+
+</body>
+</html>
